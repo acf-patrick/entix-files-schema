@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Application",
+  "description": "Schema for application configurations",
+  "type": "object",
+  "properties": {
+    "Title": {
+      "type": "string",
+      "default": "Untitled",
+      "description": "Title of the window"
+    },
+    "Size": {
+      "$ref": "./vector.schema.json",
+      "default": [600, 400],
+      "description": "Size of the window"
+    },
+    "Flags": {
+      "type": "string",
+      "enum": [
+        "shown",
+        "resizable",
+        "minimized",
+        "maximized",
+        "borderless",
+        "always on top",
+        "fullscreen"
+      ],
+      "default": "shown",
+      "description": "Flags define window behavior"
+    },
+    "Position": {
+      "oneOf": [
+        {
+          "$ref": "./vector.schema.json"
+        },
+        {
+          "type": "string",
+          "enum": ["centered"]
+        }
+      ],
+      "description": "Window position"
+    },
+    "FPS": {
+      "type": "number",
+      "default": 60,
+      "description": "Desired framerate"
+    },
+    "Scenes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "List of scenes to play"
+    }
+  }
+}
