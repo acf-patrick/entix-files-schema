@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scene",
+  "description": "Schema for scene files",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string"
+    },
+    "Entities": {
+      "type": "array",
+      "items": {
+        "$ref": "./entity.schema.json"
+      }
+    },
+    "Systems": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": ["Name", "Entities"]
+}

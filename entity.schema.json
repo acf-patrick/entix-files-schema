@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Entity",
+  "description": "Schema for entity components",
+  "type": "object",
+  "properties": {
+    "Template": {
+      "description": "A template of list of template files (entt) to use",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "TagComponent": {
+      "type": "object",
+      "description": "Unique tag for the entity",
+      "properties": {
+        "Tag": {
+          "description": "tag value",
+          "type": "string"
+        }
+      },
+      "required": ["Tag"],
+      "additionalProperties": false
+    },
+    "TransformComponent": {
+      "type": ["object", "null"],
+      "description": "Transform component describes entity position and orientation",
+      "properties": {
+        "Position": {
+          "description": "Position of the entity",
+          "$ref": "./vector.schema.json",
+          "default": [0, 0]
+        },
+        "Scale": {
+          "description": "Scale of the entity",
+          "$ref": "./vector.schema.json",
+          "default": [1, 1]
+        },
+        "Rotation": {
+          "description": "Rotation of the entity from X-axis",
+          "type": "number",
+          "default": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "SpriteComponent": {
+      "type": "object",
+      "description": "Sprite component",
+      "properties": {
+        "Texture": {
+          "type": "string",
+          "description": "Texture to be loaded"
+        },
+        "Centered": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render texture from its center"
+        },
+        "Offset": {
+          "$ref": "./vector.schema.json",
+          "default": [0, 0],
+          "description": "Texture drawing offset, according to 'centered' flag"
+        },
+        "Flip": {
+          "type": "array",
+          "description": "Flip texture along checked axis",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "default": [false, false]
+        },
+        "FramesNumber": {
+          "$ref": "./vector.schema.json",
+          "description": "Number of sprites that slices the texture",
+          "default": [1, 1]
+        },
+        "Frame": {
+          "type": "number",
+          "description": "Current frame to be displayed",
+          "default": 0
+        },
+        "RegionEnabled": {
+          "type": "boolean",
+          "description": "Will display only a part of the texture if set",
+          "default": false
+        },
+        "Region": {
+          "$ref": "./rect.schema.json",
+          "description": "Texture portion to be displayed if 'RegionEnabled' is set"
+        }
+      },
+      "required": ["Texture"],
+      "additionalProperties": false
+    },
+    "SpriteRendererComponent": {
+      "type": "null",
+      "description": "Script that renders a 'SpriteComponent'"
+    },
+    "CameraComponent": {
+      "type": ["object", "null"],
+      "description": "Camera component",
+      "properties": {
+        "Size": {
+          "description": "Size of view, between 0~1 scaling Renderer actual size",
+          "$ref": "./vector.schema.json",
+          "default": [1, 1]
+        },
+        "Destination": {
+          "description": "Where on the screen this camera view will be drawn, scaling Renderer actual size",
+          "$ref": "./vector.schema.json",
+          "default": [0, 0]
+        },
+        "BackgroundColor": {
+          "description": "Clear color applied before rendering processes",
+          "$ref": "./color.schema.json",
+          "default": [14, 16, 18, 255]
+        },
+        "BackgroundImage": {
+          "description": "Clear background with an image",
+          "type": ["string", "null"]
+        },
+        "ClearMode": {
+          "description": "Clearing mode. Some properties are associated with specific clear mode",
+          "type": "string",
+          "enum": ["none", "texture", "solid color", "texture and solid color"]
+        },
+        "Flip": {
+          "description": "Flip rendered view if set",
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 2,
+          "maximum": 2,
+          "default": [false, false]
+        },
+        "Depth": {
+          "description": "Camera position in draw orders",
+          "type": "number",
+          "default": 0
+        },
+        "Layers": {
+          "description": "Index list of layers to be performed by this camera",
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "default": [0]
+        }
+      }
+    },
+    "Tilemap": {
+      "description": "Tilemap Component. Load and render map created with Tiled software",
+      "type": "string"
+    },
+    "SpriteAnimatorComponent": {
+      "description": "Scripts that animates a sprite component",
+      "type": "object",
+      "properties": {
+        "FrameDuration": {
+          "description": "Duration of each frames in milliseconds",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
