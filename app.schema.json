@@ -15,16 +15,19 @@
       "description": "Size of the window"
     },
     "Flags": {
-      "type": "string",
-      "enum": [
-        "shown",
-        "resizable",
-        "minimized",
-        "maximized",
-        "borderless",
-        "always on top",
-        "fullscreen"
-      ],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "shown",
+          "resizable",
+          "minimized",
+          "maximized",
+          "borderless",
+          "always on top",
+          "fullscreen"
+        ]
+      },
       "default": "shown",
       "description": "Flags define window behavior"
     },
