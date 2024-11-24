@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Rect",
+  "type": "object",
+  "description": "Schema for task",
+  "oneOf": [
+    {
+      "properties": {
+        "Sequential": {
+          "type": "array",
+          "description": "List of task to be ran sequentially ",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#"
+              }
+            ]
+          }
+        }
+      },
+      "required": ["Sequential"]
+    },
+    {
+      "properties": {
+        "Asynchronous": {
+          "type": "array",
+          "description": "List of asynchronous tasks",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#"
+              }
+            ]
+          }
+        }
+      },
+      "required": ["Asynchronous"]
+    },
+    {
+      "additionalProperties": true,
+      "description": "TODO : just quick fix"
+    }
+  ]
+}
