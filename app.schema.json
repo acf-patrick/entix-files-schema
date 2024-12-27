@@ -25,22 +25,17 @@
           "maximized",
           "borderless",
           "always on top",
-          "fullscreen"
+          "fullscreen",
+          "fullscreen desktop",
+          "centered"
         ]
       },
       "default": "shown",
       "description": "Flags define window behavior"
     },
     "Position": {
-      "oneOf": [
-        {
-          "$ref": "./vector.schema.json"
-        },
-        {
-          "type": "string",
-          "enum": ["centered"]
-        }
-      ],
+      
+      "$ref": "./vector.schema.json",
       "description": "Window position"
     },
     "FPS": {
